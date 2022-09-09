@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"os"
 	"strconv"
-	"test/http-server/todo-list/model"
 	"testing"
+	"yoojae-http/todos/model"
 
 	"github.com/stretchr/testify/assert"
 )

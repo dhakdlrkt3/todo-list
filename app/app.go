@@ -5,7 +5,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"test/http-server/todo-list/model"
+	"yoojae-http/todos/model"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
