@@ -24,7 +24,7 @@ type GoogleUserId struct {
 }
 
 var googleOauthConfig = oauth2.Config{
-	RedirectURL:  "http://localhost:3000/auth/google/callback",
+	RedirectURL:  os.Getenv("DOMAIN_NAME") + "/auth/google/callback",
 	ClientID:     os.Getenv("GOOGLE_CLIENT_ID"),
 	ClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
 	Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email"},
