@@ -1,1 +1,1 @@
-web: bin/yoojae-todos
+web: bin/todos
