@@ -3,12 +3,11 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 	"yoojae-http/todos/app"
 )
 
 func main() {
-	port := os.Getenv("PORT")
+	port := "3000"
 	m := app.MakeHandler("./test.db")
 	defer m.Close()
 
