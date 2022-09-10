@@ -91,7 +91,7 @@ func newPQHandler(dbConn string) DBHandler {
 
 	statement, err := database.Prepare(
 		`CREATE TABLE IF NOT EXISTS todos (
-			id        INTEGER  PRIMARY KEY AUTOINCREMENT,
+			id        SERIAL  PRIMARY KEY,
 			sessionId STRING,
 			name      TEXT,
 			completed BOOLEAN,
