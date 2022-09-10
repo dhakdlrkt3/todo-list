@@ -95,7 +95,7 @@ func newPQHandler(dbConn string) DBHandler {
 			sessionId SVRCHAR(256),
 			name      TEXT,
 			completed BOOLEAN,
-			createdAt DATETIME
+			createdAt TIMESTAMP
 		);
 		`)
 
