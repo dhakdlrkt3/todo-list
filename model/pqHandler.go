@@ -13,7 +13,7 @@ type pqHandler struct {
 
 func (s *pqHandler) GetTodos(sessionId string) []*Todo {
 	todos := []*Todo{}
-	rows, err := s.db.Query("SELECT id, name, completed, createdAt FROM todos WHERE sessionId=?", sessionId)
+	rows, err := s.db.Query("SELECT id, name, completed, createdAt FROM todos WHERE sessionId=$1", sessionId)
 	if err != nil {
 		panic(err)
 	}
@@ -29,7 +29,7 @@ func (s *pqHandler) GetTodos(sessionId string) []*Todo {
 }
 
 func (s *pqHandler) AddTodos(sessionId string, name string) *Todo {
-	stmt, err := s.db.Prepare("INSERT INTO todos (sessionId, name, completed, createdAt) VALUES (?, ?, ?, datetime('now'))")
+	stmt, err := s.db.Prepare("INSERT INTO todos (sessionId, name, completed, createdAt) VALUES ($1, $2, $3, now())")
 	if err != nil {
 		panic(err)
 	}
@@ -48,7 +48,7 @@ func (s *pqHandler) AddTodos(sessionId string, name string) *Todo {
 }
 
 func (s *pqHandler) RemoveTodos(id int) bool {
-	stmt, err := s.db.Prepare("DELETE FROM todos WHERE id=?")
+	stmt, err := s.db.Prepare("DELETE FROM todos WHERE id=$1")
 	if err != nil {
 		panic(err)
 	}
@@ -63,7 +63,7 @@ func (s *pqHandler) RemoveTodos(id int) bool {
 }
 
 func (s *pqHandler) CompleteTodos(id int, complete bool) bool {
-	stmt, err := s.db.Prepare("UPDATE todos SET completed=? WHERE id=?")
+	stmt, err := s.db.Prepare("UPDATE todos SET completed=$1 WHERE id=$2")
 	if err != nil {
 		panic(err)
 	}
@@ -92,7 +92,7 @@ func newPQHandler(dbConn string) DBHandler {
 	statement, err := database.Prepare(
 		`CREATE TABLE IF NOT EXISTS todos (
 			id        SERIAL  PRIMARY KEY,
-			sessionId SVRCHAR(256),
+			sessionId VARCHAR(256),
 			name      TEXT,
 			completed BOOLEAN,
 			createdAt TIMESTAMP
