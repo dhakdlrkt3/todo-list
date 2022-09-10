@@ -19,6 +19,7 @@ type DBHandler interface {
 	Close()
 }
 
-func NewDBHandler(filepath string) DBHandler {
-	return newSqliteHandler(filepath)
+func NewDBHandler(dbConn string) DBHandler {
+	// return newSqliteHandler(filepath)
+	return newPQHandler(dbConn)
 }
