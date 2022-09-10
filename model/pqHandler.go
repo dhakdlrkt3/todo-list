@@ -97,7 +97,19 @@ func newPQHandler(dbConn string) DBHandler {
 			completed BOOLEAN,
 			createdAt DATETIME
 		);
-		CREATE INDEX IF NOT EXISTS sessionIdIndexOnTodos ON todos (
+		`)
+
+	if err != nil {
+		panic(err)
+	}
+
+	_, err = statement.Exec()
+	if err != nil {
+		panic(err)
+	}
+
+	statement, err = database.Prepare(
+		`CREATE INDEX IF NOT EXISTS sessionIdIndexOnTodos ON todos (
 			sessionId ASC
 		);
 		`)
